@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <ImageView
+        android:contentDescription="dealer's first card"
+        android:id="@+id/dealer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/back_blue" />
+    <ImageView
+        android:contentDescription="dealer's 2nd card"
+        android:id="@+id/dealer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/dealer1"
+        android:layout_alignStart="@id/dealer1"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/back_blue" />
+    <ImageView
+        android:contentDescription="player's first card"
+        android:id="@+id/player1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@id/dealer1"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/back_blue" />
+    <ImageView
+        android:contentDescription="dealer's second card"
+        android:id="@+id/player2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/player1"
+        android:layout_alignStart="@id/player1"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/back_blue" />
+</RelativeLayout>

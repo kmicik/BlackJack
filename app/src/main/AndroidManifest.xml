@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AuthorAppInfo" android:label="Info" android:screenOrientation="portrait"/>
+        <activity android:name=".PlayGame" android:label="BlackJack" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
