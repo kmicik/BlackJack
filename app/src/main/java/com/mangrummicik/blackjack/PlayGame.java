@@ -5,6 +5,7 @@ package com.mangrummicik.blackjack;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.Random;
@@ -28,6 +29,7 @@ public class PlayGame extends Activity implements View.OnClickListener{
     int deckSize = 52;
     int rand1 = r.nextInt(52);
     int rand2 = r.nextInt(52);
+    int hit = 0;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,11 +48,52 @@ public class PlayGame extends Activity implements View.OnClickListener{
         deckSize--;
         player = findViewById(R.id.player2);
         player.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize-1]), "drawable", getPackageName()));
+
+        Button b = findViewById(R.id.hit_button);
+        b.setOnClickListener(this);
+
+        b = findViewById(R.id.stay_button);
+        b.setOnClickListener(this);
     }
 
     public void onClick(View v){
-
+        ImageView player;
+        //int hit = 0;
+            if (v.getId() == R.id.hit_button) {
+                hit ++;
+            }
+            if (hit == 1){
+                deckSize--;
+                player = findViewById(R.id.player3);
+                player.setVisibility(View.VISIBLE);
+                player.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize-1]), "drawable", getPackageName()));
+            }
+            if (hit == 2){
+                deckSize--;
+                player = findViewById(R.id.player4);
+                player.setVisibility(View.VISIBLE);
+                player.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize-1]), "drawable", getPackageName()));
+            }
+            if (hit == 3){
+                deckSize--;
+                player = findViewById(R.id.player5);
+                player.setVisibility(View.VISIBLE);
+                player.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize-1]), "drawable", getPackageName()));
+            }
+            if (hit == 4){
+                deckSize--;
+                player = findViewById(R.id.player6);
+                player.setVisibility(View.VISIBLE);
+                player.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize-1]), "drawable", getPackageName()));
+            }
+            if (hit == 5){
+                deckSize--;
+                player = findViewById(R.id.player7);
+                player.setVisibility(View.VISIBLE);
+                player.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize-1]), "drawable", getPackageName()));
+            }
     }
+
     public void shuffle(int shuffled[]){
         for(int j = 0; j < 1000000; j++) {
                 int temp = shuffled[rand1];
