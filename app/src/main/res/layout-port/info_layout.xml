@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:id="@+id/infoText"
@@ -8,7 +9,7 @@
         android:layout_marginRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This app was developed by Caleb Mangrum and Kristopher Micik.  The goal is to create a version of blackjack that is as fun as it is memorable.  Thanks for playing!"
+        android:text="@string/aboutApp"
         android:textSize="20sp"
         />
 
