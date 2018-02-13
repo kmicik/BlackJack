@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/player2"
-        android:layout_marginStart="46dp"
+        android:layout_marginStart="54dp"
         android:text="Hit" />
 
     <Button

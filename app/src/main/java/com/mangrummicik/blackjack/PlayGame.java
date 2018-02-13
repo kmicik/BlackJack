@@ -4,11 +4,11 @@ package com.mangrummicik.blackjack;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import java.util.Random;
 
@@ -38,12 +38,17 @@ public class PlayGame extends Activity implements View.OnClickListener{
     int hit = 0;
     int dealHit = 0;
     int dealerScore = 0;
+    boolean dealAces = false;
+    boolean playAces = false;
+    boolean playStood = false;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_game);
         ImageView dealer = findViewById(R.id.dealer1);
         ImageView player = findViewById(R.id.player1);
+        TextView tv = findViewById(R.id.winText);
+        tv.setText("");
 
         shuffle(deck);
         shuffle(deck);
@@ -74,6 +79,7 @@ public class PlayGame extends Activity implements View.OnClickListener{
     public void winCheck(int [] pCards, int [] dCards){
         int pTotal = 0;
         int dTotal = 0;
+        dealerScore = 0;
         TextView tv = findViewById(R.id.winText);
         TextView pText = findViewById(R.id.playerText);
         TextView dText = findViewById(R.id.dealerText);
@@ -123,90 +129,82 @@ public class PlayGame extends Activity implements View.OnClickListener{
             }
             else if(R.drawable.ace_spades == pCards[i] || R.drawable.ace_hearts == pCards[i]
                     || R.drawable.ace_diamonds == pCards[i] || R.drawable.ace_clubs == pCards[i]){
-                if(pTotal + 11 <= 21){
-                    pTotal += 11;
-                }
-                else{
-                    pTotal += 1;
-                }
-            }
-            pText.setText(String.valueOf(pTotal));
-            if(pTotal == 21){
-                tv.setText(R.string.playerWins);
-                b.setEnabled(false);
-                b = findViewById(R.id.stay_button);
-                b.setEnabled(false);
-            }
-            else if(pTotal > 21){
-                tv.setText(R.string.dealerWins);
-                b.setEnabled(false);
-                b = findViewById(R.id.stay_button);
-                b.setEnabled(false);
+                pTotal += 1;
+                playAces = true;
             }
         }
-        for(int i = 0; i < dCards.length; i++){
-            if(R.drawable.spades_2 == dCards[i] || R.drawable.hearts_2 == dCards[i]
-                    || R.drawable.clubs_2 == dCards[i] || R.drawable.diamonds_2 == dCards[i]){
+        if(pTotal + 10 <= 21 && playAces){
+            pTotal += 10;
+        }
+        pText.setText(String.valueOf(pTotal));
+        if(pTotal == 21){
+            tv.setText(R.string.playerWins);
+            b.setEnabled(false);
+            b = findViewById(R.id.stay_button);
+            b.setEnabled(false);
+        }
+        else if(pTotal > 21){
+            tv.setText(R.string.dealerWins);
+            b.setEnabled(false);
+            b = findViewById(R.id.stay_button);
+            b.setEnabled(false);
+        }
+
+        for(int i = 0; i < dCards.length; i++) {
+            if (R.drawable.spades_2 == dCards[i] || R.drawable.hearts_2 == dCards[i]
+                    || R.drawable.clubs_2 == dCards[i] || R.drawable.diamonds_2 == dCards[i]) {
                 dTotal += 2;
                 dealerScore += 2;
-            }
-            else if(R.drawable.spades_3 == dCards[i] || R.drawable.hearts_3 == dCards[i]
-                    || R.drawable.clubs_3 == dCards[i] || R.drawable.diamonds_3 == dCards[i]){
+            } else if (R.drawable.spades_3 == dCards[i] || R.drawable.hearts_3 == dCards[i]
+                    || R.drawable.clubs_3 == dCards[i] || R.drawable.diamonds_3 == dCards[i]) {
                 dTotal += 3;
                 dealerScore += 3;
-            }
-            else if(R.drawable.spades_4 == dCards[i] || R.drawable.hearts_4 == dCards[i]
-                    || R.drawable.clubs_4 == dCards[i] || R.drawable.diamonds_4 == dCards[i]){
+            } else if (R.drawable.spades_4 == dCards[i] || R.drawable.hearts_4 == dCards[i]
+                    || R.drawable.clubs_4 == dCards[i] || R.drawable.diamonds_4 == dCards[i]) {
                 dTotal += 4;
                 dealerScore += 4;
-            }
-            else if(R.drawable.spades_5 == dCards[i] || R.drawable.hearts_5 == dCards[i]
-                    || R.drawable.clubs_5 == dCards[i] || R.drawable.diamonds_5 == dCards[i]){
+            } else if (R.drawable.spades_5 == dCards[i] || R.drawable.hearts_5 == dCards[i]
+                    || R.drawable.clubs_5 == dCards[i] || R.drawable.diamonds_5 == dCards[i]) {
                 dTotal += 5;
                 dealerScore += 5;
-            }
-            else if(R.drawable.spades_6 == dCards[i] || R.drawable.hearts_6 == dCards[i]
-                    || R.drawable.clubs_6 == dCards[i] || R.drawable.diamonds_6 == dCards[i]){
+            } else if (R.drawable.spades_6 == dCards[i] || R.drawable.hearts_6 == dCards[i]
+                    || R.drawable.clubs_6 == dCards[i] || R.drawable.diamonds_6 == dCards[i]) {
                 dTotal += 6;
                 dealerScore += 6;
-            }
-            else if(R.drawable.spades_7 == dCards[i] || R.drawable.hearts_7 == dCards[i]
-                    || R.drawable.clubs_7 == dCards[i] || R.drawable.diamonds_7 == dCards[i]){
+            } else if (R.drawable.spades_7 == dCards[i] || R.drawable.hearts_7 == dCards[i]
+                    || R.drawable.clubs_7 == dCards[i] || R.drawable.diamonds_7 == dCards[i]) {
                 dTotal += 7;
                 dealerScore += 7;
-            }
-            else if(R.drawable.spades_8 == dCards[i] || R.drawable.hearts_8 == dCards[i]
-                    || R.drawable.clubs_8 == dCards[i] || R.drawable.diamonds_8 == dCards[i]){
+            } else if (R.drawable.spades_8 == dCards[i] || R.drawable.hearts_8 == dCards[i]
+                    || R.drawable.clubs_8 == dCards[i] || R.drawable.diamonds_8 == dCards[i]) {
                 dTotal += 8;
                 dealerScore += 8;
-            }
-            else if(R.drawable.spades_9 == dCards[i] || R.drawable.hearts_9 == dCards[i]
-                    || R.drawable.clubs_9 == dCards[i] || R.drawable.diamonds_9 == dCards[i]){
+            } else if (R.drawable.spades_9 == dCards[i] || R.drawable.hearts_9 == dCards[i]
+                    || R.drawable.clubs_9 == dCards[i] || R.drawable.diamonds_9 == dCards[i]) {
                 dTotal += 9;
                 dealerScore += 9;
-            }
-            else if(R.drawable.jack_hearts == dCards[i] || R.drawable.jack_spades == dCards[i]
+            } else if (R.drawable.jack_hearts == dCards[i] || R.drawable.jack_spades == dCards[i]
                     || R.drawable.jack_clubs == dCards[i] || R.drawable.jack_diamonds == dCards[i]
                     || R.drawable.queen_hearts == dCards[i] || R.drawable.queen_spades == dCards[i]
                     || R.drawable.queen_clubs == dCards[i] || R.drawable.queen_diamonds == dCards[i]
                     || R.drawable.king_hearts == dCards[i] || R.drawable.king_spades == dCards[i]
                     || R.drawable.king_clubs == dCards[i] || R.drawable.king_diamonds == dCards[i]
                     || R.drawable.clubs_10 == dCards[i] || R.drawable.diamonds_10 == dCards[i]
-                    || R.drawable.hearts_10 == dCards[i] || R.drawable.spades_10 == dCards[i]){
+                    || R.drawable.hearts_10 == dCards[i] || R.drawable.spades_10 == dCards[i]) {
                 dTotal += 10;
                 dealerScore += 10;
+            } else if (R.drawable.ace_spades == dCards[i] || R.drawable.ace_hearts == dCards[i]
+                    || R.drawable.ace_diamonds == dCards[i] || R.drawable.ace_clubs == dCards[i]) {
+                dTotal += 1;
+                dealerScore += 1;
+                dealAces = true;
             }
-            else if(R.drawable.ace_spades == dCards[i] || R.drawable.ace_hearts == dCards[i]
-                    || R.drawable.ace_diamonds == dCards[i] || R.drawable.ace_clubs == dCards[i]){
-                if(dTotal + 11 > 21){
-                    dTotal += 1;
-                    dealerScore += 1;
-                }
-                else{
-                    dTotal += 11;
-                    dealerScore += 11;
-                }
-            }
+        }
+        if (dTotal + 10 <= 21 && dealAces)
+        {
+            dTotal += 10;
+            dealerScore += 10;
+        }
             if(dTotal == 21){
                 /*placeholder code so there are less warnings*/
                 dTotal = 21;
@@ -218,7 +216,7 @@ public class PlayGame extends Activity implements View.OnClickListener{
                 dealerScore += 22;
             }
             dText.setText(String.valueOf(dTotal));
-            if(dTotal == 21 || (dTotal > pTotal && dTotal <= 21)){
+            if(dTotal == 21 || (dTotal > pTotal && dTotal <= 21 && playStood)){
                 tv.setText(R.string.dealerWins);
                 b.setEnabled(false);
                 b = findViewById(R.id.stay_button);
@@ -229,14 +227,13 @@ public class PlayGame extends Activity implements View.OnClickListener{
                 b.setEnabled(false);
                 b = findViewById(R.id.stay_button);
                 b.setEnabled(false);
-            } else if (dTotal == pTotal){
+            } else if (dTotal == pTotal && playStood){
                 tv.setText(R.string.playerWins);
                 b.setEnabled(false);
                 b = findViewById(R.id.stay_button);
                 b.setEnabled(false);
             }
         }
-    }
     public void onClick(View v){
         ImageView player;
         ImageView dealer;
@@ -285,6 +282,7 @@ public class PlayGame extends Activity implements View.OnClickListener{
                 }
             }
             if (v.getId() == R.id.stay_button){
+                playStood = true;
                 Button b = findViewById(R.id.hit_button);
                 b.setEnabled(false);
                 dealer = findViewById(R.id.dealer2);
