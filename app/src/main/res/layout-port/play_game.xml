@@ -127,4 +127,58 @@
         android:layout_marginTop="52dp"
         android:textSize="20sp" />
 
+    <ImageView
+        android:id="@+id/dealer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/winText"
+        android:layout_alignStart="@+id/player3"
+        android:src="@drawable/back_blue" />
+
+    <ImageView
+        android:id="@+id/dealer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/winText"
+        android:layout_alignTop="@+id/dealer3"
+        android:src="@drawable/back_blue" />
+
+    <ImageView
+        android:id="@+id/dealer5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/player5"
+        android:layout_alignTop="@+id/dealer3"
+        android:src="@drawable/back_blue" />
+
+    <ImageView
+        android:id="@+id/dealer6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/player6"
+        android:layout_alignTop="@+id/dealer3"
+        android:src="@drawable/back_blue" />
+
+    <ImageView
+        android:id="@+id/dealer7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/player7"
+        android:layout_alignTop="@+id/dealer4"
+        android:src="@drawable/back_blue" />
+
+    <TextView
+        android:id="@+id/playerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/dealer1"
+        android:layout_alignTop="@+id/winText" />
+
+    <TextView
+        android:id="@+id/dealerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/winText"
+        android:layout_alignEnd="@+id/player7" />
+
 </RelativeLayout>

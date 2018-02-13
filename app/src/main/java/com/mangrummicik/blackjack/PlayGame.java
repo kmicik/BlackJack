@@ -36,6 +36,8 @@ public class PlayGame extends Activity implements View.OnClickListener{
     int rand1 = r.nextInt(52);
     int rand2 = r.nextInt(52);
     int hit = 0;
+    int dealHit = 0;
+    int dealerScore = 0;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -73,6 +75,8 @@ public class PlayGame extends Activity implements View.OnClickListener{
         int pTotal = 0;
         int dTotal = 0;
         TextView tv = findViewById(R.id.winText);
+        TextView pText = findViewById(R.id.playerText);
+        TextView dText = findViewById(R.id.dealerText);
         Button b = findViewById(R.id.hit_button);
         for(int i = 0; i < pCards.length; i++){
             if(R.drawable.spades_2 == pCards[i] || R.drawable.hearts_2 == pCards[i]
@@ -112,7 +116,9 @@ public class PlayGame extends Activity implements View.OnClickListener{
                     || R.drawable.queen_hearts == pCards[i] || R.drawable.queen_spades == pCards[i]
                     || R.drawable.queen_clubs == pCards[i] || R.drawable.queen_diamonds == pCards[i]
                     || R.drawable.king_hearts == pCards[i] || R.drawable.king_spades == pCards[i]
-                    || R.drawable.king_clubs == pCards[i] || R.drawable.king_diamonds == pCards[i]){
+                    || R.drawable.king_clubs == pCards[i] || R.drawable.king_diamonds == pCards[i]
+                    || R.drawable.clubs_10 == pCards[i] || R.drawable.diamonds_10 == pCards[i]
+                    || R.drawable.hearts_10 == pCards[i] || R.drawable.spades_10 == pCards[i]){
                 pTotal += 10;
             }
             else if(R.drawable.ace_spades == pCards[i] || R.drawable.ace_hearts == pCards[i]
@@ -124,7 +130,7 @@ public class PlayGame extends Activity implements View.OnClickListener{
                     pTotal += 1;
                 }
             }
-            tv.setText(String.valueOf(pTotal));
+            pText.setText(String.valueOf(pTotal));
             if(pTotal == 21){
                 tv.setText(R.string.playerWins);
                 b.setEnabled(false);
@@ -142,65 +148,98 @@ public class PlayGame extends Activity implements View.OnClickListener{
             if(R.drawable.spades_2 == dCards[i] || R.drawable.hearts_2 == dCards[i]
                     || R.drawable.clubs_2 == dCards[i] || R.drawable.diamonds_2 == dCards[i]){
                 dTotal += 2;
+                dealerScore += 2;
             }
             else if(R.drawable.spades_3 == dCards[i] || R.drawable.hearts_3 == dCards[i]
                     || R.drawable.clubs_3 == dCards[i] || R.drawable.diamonds_3 == dCards[i]){
                 dTotal += 3;
+                dealerScore += 3;
             }
             else if(R.drawable.spades_4 == dCards[i] || R.drawable.hearts_4 == dCards[i]
                     || R.drawable.clubs_4 == dCards[i] || R.drawable.diamonds_4 == dCards[i]){
                 dTotal += 4;
+                dealerScore += 4;
             }
             else if(R.drawable.spades_5 == dCards[i] || R.drawable.hearts_5 == dCards[i]
                     || R.drawable.clubs_5 == dCards[i] || R.drawable.diamonds_5 == dCards[i]){
                 dTotal += 5;
+                dealerScore += 5;
             }
             else if(R.drawable.spades_6 == dCards[i] || R.drawable.hearts_6 == dCards[i]
                     || R.drawable.clubs_6 == dCards[i] || R.drawable.diamonds_6 == dCards[i]){
                 dTotal += 6;
+                dealerScore += 6;
             }
             else if(R.drawable.spades_7 == dCards[i] || R.drawable.hearts_7 == dCards[i]
                     || R.drawable.clubs_7 == dCards[i] || R.drawable.diamonds_7 == dCards[i]){
                 dTotal += 7;
+                dealerScore += 7;
             }
             else if(R.drawable.spades_8 == dCards[i] || R.drawable.hearts_8 == dCards[i]
                     || R.drawable.clubs_8 == dCards[i] || R.drawable.diamonds_8 == dCards[i]){
                 dTotal += 8;
+                dealerScore += 8;
             }
             else if(R.drawable.spades_9 == dCards[i] || R.drawable.hearts_9 == dCards[i]
                     || R.drawable.clubs_9 == dCards[i] || R.drawable.diamonds_9 == dCards[i]){
                 dTotal += 9;
+                dealerScore += 9;
             }
             else if(R.drawable.jack_hearts == dCards[i] || R.drawable.jack_spades == dCards[i]
                     || R.drawable.jack_clubs == dCards[i] || R.drawable.jack_diamonds == dCards[i]
                     || R.drawable.queen_hearts == dCards[i] || R.drawable.queen_spades == dCards[i]
                     || R.drawable.queen_clubs == dCards[i] || R.drawable.queen_diamonds == dCards[i]
                     || R.drawable.king_hearts == dCards[i] || R.drawable.king_spades == dCards[i]
-                    || R.drawable.king_clubs == dCards[i] || R.drawable.king_diamonds == dCards[i]){
+                    || R.drawable.king_clubs == dCards[i] || R.drawable.king_diamonds == dCards[i]
+                    || R.drawable.clubs_10 == dCards[i] || R.drawable.diamonds_10 == dCards[i]
+                    || R.drawable.hearts_10 == dCards[i] || R.drawable.spades_10 == dCards[i]){
                 dTotal += 10;
+                dealerScore += 10;
             }
             else if(R.drawable.ace_spades == dCards[i] || R.drawable.ace_hearts == dCards[i]
                     || R.drawable.ace_diamonds == dCards[i] || R.drawable.ace_clubs == dCards[i]){
-                if(pTotal + 11 > 21){
+                if(dTotal + 11 > 21){
                     dTotal += 1;
+                    dealerScore += 1;
                 }
                 else{
                     dTotal += 11;
+                    dealerScore += 11;
                 }
             }
             if(dTotal == 21){
                 /*placeholder code so there are less warnings*/
                 dTotal = 21;
+                dealerScore += 21;
             }
             else if(dTotal > 21){
                 /*placeholder code so there are less warnings*/
                 dTotal = 22;
+                dealerScore += 22;
+            }
+            dText.setText(String.valueOf(dTotal));
+            if(dTotal == 21 || (dTotal > pTotal && dTotal <= 21)){
+                tv.setText(R.string.dealerWins);
+                b.setEnabled(false);
+                b = findViewById(R.id.stay_button);
+                b.setEnabled(false);
+            }
+            else if(dTotal > 21) {
+                tv.setText(R.string.playerWins);
+                b.setEnabled(false);
+                b = findViewById(R.id.stay_button);
+                b.setEnabled(false);
+            } else if (dTotal == pTotal){
+                tv.setText(R.string.playerWins);
+                b.setEnabled(false);
+                b = findViewById(R.id.stay_button);
+                b.setEnabled(false);
             }
         }
     }
     public void onClick(View v){
         ImageView player;
-        //int hit = 0;
+        ImageView dealer;
             if (v.getId() == R.id.hit_button) {
                 hit++;
                 if (hit == 1) {
@@ -243,6 +282,59 @@ public class PlayGame extends Activity implements View.OnClickListener{
                     deckSize--;
                     playerCards++;
                     winCheck(playerDealt, dealerDealt);
+                }
+            }
+            if (v.getId() == R.id.stay_button){
+                Button b = findViewById(R.id.hit_button);
+                b.setEnabled(false);
+                dealer = findViewById(R.id.dealer2);
+                dealer.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize - 1]), "drawable", getPackageName()));
+                dealerDealt[dealerCards] = deck[deckSize - 1];
+                deckSize--;
+                dealerCards++;
+                while (dealerScore < 17){
+                    dealHit++;
+                    if (dealHit == 1) {
+                        dealer = findViewById(R.id.dealer3);
+                        dealer.setVisibility(View.VISIBLE);
+                        dealer.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize - 1]), "drawable", getPackageName()));
+                        dealerDealt[dealerCards] = deck[deckSize - 1];
+                        deckSize--;
+                        dealerCards++;
+                        winCheck(playerDealt, dealerDealt);
+                    } else if (dealHit == 2) {
+                        dealer = findViewById(R.id.dealer4);
+                        dealer.setVisibility(View.VISIBLE);
+                        dealer.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize - 1]), "drawable", getPackageName()));
+                        dealerDealt[dealerCards] = deck[deckSize - 1];
+                        deckSize--;
+                        dealerCards++;
+                        winCheck(playerDealt, dealerDealt);
+                    } else if (dealHit == 3) {
+                        dealer = findViewById(R.id.dealer5);
+                        dealer.setVisibility(View.VISIBLE);
+                        dealer.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize - 1]), "drawable", getPackageName()));
+                        dealerDealt[dealerCards] = deck[deckSize - 1];
+                        deckSize--;
+                        dealerCards++;
+                        winCheck(playerDealt, dealerDealt);
+                    } else if (dealHit == 4) {
+                        dealer = findViewById(R.id.dealer6);
+                        dealer.setVisibility(View.VISIBLE);
+                        dealer.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize - 1]), "drawable", getPackageName()));
+                        dealerDealt[dealerCards] = deck[deckSize - 1];
+                        deckSize--;
+                        dealerCards++;
+                        winCheck(playerDealt, dealerDealt);
+                    } else if (dealHit == 5) {
+                        dealer = findViewById(R.id.dealer7);
+                        dealer.setVisibility(View.VISIBLE);
+                        dealer.setImageResource(getResources().getIdentifier(String.valueOf(deck[deckSize - 1]), "drawable", getPackageName()));
+                        dealerDealt[dealerCards] = deck[deckSize - 1];
+                        deckSize--;
+                        dealerCards++;
+                        winCheck(playerDealt, dealerDealt);
+                    }
                 }
             }
     }
