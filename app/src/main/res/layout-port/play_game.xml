@@ -117,4 +117,14 @@
         android:src="@drawable/back_blue"
         android:visibility="invisible" />
 
+    <TextView
+        android:id="@+id/winText"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/player4"
+        android:layout_below="@+id/dealer2"
+        android:layout_marginTop="52dp"
+        android:textSize="20sp" />
+
 </RelativeLayout>
