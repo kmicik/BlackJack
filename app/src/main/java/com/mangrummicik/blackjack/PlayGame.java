@@ -38,6 +38,7 @@ public class PlayGame extends Activity implements View.OnClickListener{
     int hit = 0;
     int dealHit = 0;
     int dealerScore = 0;
+    int playerScore = 0;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -82,34 +83,42 @@ public class PlayGame extends Activity implements View.OnClickListener{
             if(R.drawable.spades_2 == pCards[i] || R.drawable.hearts_2 == pCards[i]
                     || R.drawable.clubs_2 == pCards[i] || R.drawable.diamonds_2 == pCards[i]){
                 pTotal += 2;
+                playerScore += 2;
             }
             else if(R.drawable.spades_3 == pCards[i] || R.drawable.hearts_3 == pCards[i]
                     || R.drawable.clubs_3 == pCards[i] || R.drawable.diamonds_3 == pCards[i]){
                 pTotal += 3;
+                playerScore += 3;
             }
             else if(R.drawable.spades_4 == pCards[i] || R.drawable.hearts_4 == pCards[i]
                     || R.drawable.clubs_4 == pCards[i] || R.drawable.diamonds_4 == pCards[i]){
                 pTotal += 4;
+                playerScore += 4;
             }
             else if(R.drawable.spades_5 == pCards[i] || R.drawable.hearts_5 == pCards[i]
                     || R.drawable.clubs_5 == pCards[i] || R.drawable.diamonds_5 == pCards[i]){
                 pTotal += 5;
+                playerScore += 5;
             }
             else if(R.drawable.spades_6 == pCards[i] || R.drawable.hearts_6 == pCards[i]
                     || R.drawable.clubs_6 == pCards[i] || R.drawable.diamonds_6 == pCards[i]){
                 pTotal += 6;
+                playerScore += 6;
             }
             else if(R.drawable.spades_7 == pCards[i] || R.drawable.hearts_7 == pCards[i]
                     || R.drawable.clubs_7 == pCards[i] || R.drawable.diamonds_7 == pCards[i]){
                 pTotal += 7;
+                playerScore += 7;
             }
             else if(R.drawable.spades_8 == pCards[i] || R.drawable.hearts_8 == pCards[i]
                     || R.drawable.clubs_8 == pCards[i] || R.drawable.diamonds_8 == pCards[i]){
                 pTotal += 8;
+                playerScore += 8;
             }
             else if(R.drawable.spades_9 == pCards[i] || R.drawable.hearts_9 == pCards[i]
                     || R.drawable.clubs_9 == pCards[i] || R.drawable.diamonds_9 == pCards[i]){
                 pTotal += 9;
+                playerScore += 9;
             }
             else if(R.drawable.jack_hearts == pCards[i] || R.drawable.jack_spades == pCards[i]
                     || R.drawable.jack_clubs == pCards[i] || R.drawable.jack_diamonds == pCards[i]
@@ -120,14 +129,17 @@ public class PlayGame extends Activity implements View.OnClickListener{
                     || R.drawable.clubs_10 == pCards[i] || R.drawable.diamonds_10 == pCards[i]
                     || R.drawable.hearts_10 == pCards[i] || R.drawable.spades_10 == pCards[i]){
                 pTotal += 10;
+                playerScore += 10;
             }
             else if(R.drawable.ace_spades == pCards[i] || R.drawable.ace_hearts == pCards[i]
                     || R.drawable.ace_diamonds == pCards[i] || R.drawable.ace_clubs == pCards[i]){
                 if(pTotal + 11 <= 21){
                     pTotal += 11;
+                    playerScore += 11;
                 }
                 else{
                     pTotal += 1;
+                    playerScore += 1;
                 }
             }
             pText.setText(String.valueOf(pTotal));
@@ -218,13 +230,13 @@ public class PlayGame extends Activity implements View.OnClickListener{
                 dealerScore += 22;
             }
             dText.setText(String.valueOf(dTotal));
-            if(dTotal == 21 || (dTotal > pTotal && dTotal <= 21)){
+            if(dTotal == 21 || (dTotal >= 17 && dTotal > pTotal && dTotal > 21)){
                 tv.setText(R.string.dealerWins);
                 b.setEnabled(false);
                 b = findViewById(R.id.stay_button);
                 b.setEnabled(false);
             }
-            else if(dTotal > 21) {
+            else if(dTotal > 21 || (dTotal == 17 && dTotal < pTotal)) {
                 tv.setText(R.string.playerWins);
                 b.setEnabled(false);
                 b = findViewById(R.id.stay_button);
@@ -240,6 +252,7 @@ public class PlayGame extends Activity implements View.OnClickListener{
     public void onClick(View v){
         ImageView player;
         ImageView dealer;
+        TextView tv = findViewById(R.id.winText);
             if (v.getId() == R.id.hit_button) {
                 hit++;
                 if (hit == 1) {
